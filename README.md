@@ -7,8 +7,10 @@ with constant nonzero Jacobian determinant has a real zero.
 - [`main.tex`](main.tex) is the LaTeX source.
 - [`main.pdf`](main.pdf) is the compiled paper.
 - [`compact_tweet.tex`](compact_tweet.tex) is a 16:9 summary card.
-- [`compact_tweet.png`](output/pdf/compact_tweet.png) is the 1600x900 image
+- [`compact_tweet.png`](compact_tweet.png) is the 1600x900 image
   ready to attach to a post.
+
+This project is available under the [MIT License](LICENSE).
 
 ## Build
 
