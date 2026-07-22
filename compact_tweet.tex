@@ -15,29 +15,12 @@
 \definecolor{ink}{HTML}{14213D}
 \definecolor{blue}{HTML}{2864DC}
 \definecolor{bluepale}{HTML}{EEF4FF}
-\definecolor{teal}{HTML}{0B8F87}
-\definecolor{line}{HTML}{CBD8EE}
 \definecolor{muted}{HTML}{52627A}
-\definecolor{paper}{HTML}{F7F9FD}
+\definecolor{paper}{HTML}{FAFBFE}
 
 \pagestyle{empty}
 \setlength{\parindent}{0pt}
-\setlength{\fboxsep}{1.5mm}
-\setlength{\fboxrule}{0.35pt}
 \renewcommand{\familydefault}{\sfdefault}
-
-\tikzset{
-  card/.style={
-    anchor=north west,
-    draw=line,
-    fill=white,
-    rounded corners=1mm,
-    line width=0.35pt,
-    inner sep=2mm,
-    text width=42mm,
-    minimum height=33mm
-  }
-}
 
 \begin{document}
 \color{ink}
@@ -49,93 +32,60 @@
 
   \node[anchor=north west,inner sep=0pt,text width=146mm]
     at ([xshift=7mm,yshift=-7mm]current page.north west) {%
-      {\color{blue}\bfseries\fontsize{7}{8}\selectfont
-      AN EXPLICIT NP-HARDNESS REDUCTION}\par
-      \vspace{0.5mm}
-      {\bfseries\fontsize{17.28}{18.5}\selectfont
-      From 3SAT to zero-finding with constant Jacobian}
+      {\bfseries\fontsize{17.28}{19}\selectfont
+      3SAT $\longrightarrow$ zero-finding with constant Jacobian}
     };
 
-  \node[anchor=north west,fill=bluepale,inner sep=2mm,text width=142mm]
-    at ([xshift=7mm,yshift=-22mm]current page.north west) {%
-      \centering
-      {\fontsize{10}{11.5}\selectfont For every $3$CNF formula $\phi$, construct
-      $K_\phi:\mathbb R^{3n+3m}\to\mathbb R^{3n+3m}$ such that}\par
-      \vspace{0.3mm}
-      {\bfseries\fontsize{12}{13.5}\selectfont
-      $\displaystyle
-      \begin{aligned}
+  \node[anchor=north west,fill=bluepale,inner sep=2.3mm,text width=141.4mm]
+    at ([xshift=7mm,yshift=-19mm]current page.north west) {%
+      {\color{blue}\bfseries\fontsize{8}{9}\selectfont CLAIM}\par
+      \vspace{0.7mm}
+      {\fontsize{10}{11.5}\selectfont
+      For every $3$CNF formula $\phi$ with $n$ variables and $m$ clauses, one
+      can construct a degree-$7$ polynomial map
+      $K_\phi:\mathbb R^{3n+3m}\to\mathbb R^{3n+3m}$ such that
+      \[
         K_\phi^{-1}(0)\ne\varnothing
-          &\iff \phi\in\mathrm{SAT},\\[-0.5mm]
-        \det JK_\phi&\equiv(-3456)^{n+m},
-          \qquad \deg K_\phi\le 7.
-      \end{aligned}$}
+        \iff \phi\in\mathrm{SAT},
+        \qquad
+        \det JK_\phi\equiv(-3456)^{n+m}.
+      \]}
     };
 
-  \node[card] at ([xshift=7mm,yshift=-44mm]current page.north west) {%
-    {\color{blue}\bfseries\fontsize{9.5}{10.5}\selectfont 1. Encode one bit}\par
-    \vspace{0.8mm}
-    {\fontsize{7.2}{8.4}\selectfont
-    \setlength{\abovedisplayskip}{0.8mm}
-    \setlength{\belowdisplayskip}{0.8mm}
-    Fix $H:\mathbb R^3\to\mathbb R^3$ with
-    \[
-      \begin{aligned}
-        \det JH&\equiv-3456,\\
-        H^{-1}(0)&=\{r_0,r_+,r_-\}.
-      \end{aligned}
-    \]
-    Decode with $\beta(x,y,z)=x^2$:
-    \[
-      \beta(r_0)=0,
-      \qquad \beta(r_\pm)=1.
-    \]}
-  };
+  \node[anchor=north west,inner sep=0pt,text width=146mm]
+    at ([xshift=7mm,yshift=-45.5mm]current page.north west) {%
+      {\fontsize{7.6}{9}\selectfont
+      \setlength{\abovedisplayskip}{1mm}
+      \setlength{\belowdisplayskip}{1mm}
+      \textbf{Proof idea.}
+      Fix a polynomial map $H:\mathbb R^3\to\mathbb R^3$ with
+      $\det JH\equiv-3456$, with exactly three preimages of zero,
+      $H^{-1}(0)=\{r_0,r_+,r_-\}$, and with some omitted target
+      $\Delta\notin\operatorname{im}(H)$.  The decoder
+      $\beta(x,y,z)=x^2$ reads $r_0$ as $0$ and $r_\pm$ as $1$.
 
-  \node[card] at ([xshift=57mm,yshift=-44mm]current page.north west) {%
-    {\color{teal}\bfseries\fontsize{9.5}{10.5}\selectfont 2. Turn truth into a zero}\par
-    \vspace{0.8mm}
-    {\fontsize{7.2}{8.4}\selectfont
-    \setlength{\abovedisplayskip}{0.8mm}
-    \setlength{\belowdisplayskip}{0.8mm}
-    Choose $\Delta\notin\operatorname{im}(H)$ and define
-    \[
-      T_s(v)=H(v)-(1-s)\Delta.
-    \]
-    For $s\in\{0,1\}$,
-    \[
-      \exists v:\ T_s(v)=0
-      \iff s=1.
-    \]
-    Set $s=$ ``this clause is satisfied.''}
-  };
+      \vspace{0.8mm}
+      Given $\phi$, give each variable $X_i$ a block $w_i\in\mathbb R^3$ and
+      include $H(w_i)$ in the output.  Therefore every zero forces
+      $X_i=\beta(w_i)\in\{0,1\}$.  For each clause $C_j$, let $s_j$ be its
+      usual polynomial Boolean value, so $s_j=1$ exactly when $C_j$ is true.
 
-  \node[card] at ([xshift=107mm,yshift=-44mm]current page.north west) {%
-    {\color{blue}\bfseries\fontsize{9.5}{10.5}\selectfont 3. Stack the gadgets}\par
-    \vspace{0.8mm}
-    {\fontsize{7.2}{8.4}\selectfont
-    \setlength{\abovedisplayskip}{0.8mm}
-    \setlength{\belowdisplayskip}{0.8mm}
-    Stack one variable block and one clause block per gadget:
-    \[
-      K_\phi=(H(w_1),\ldots,T_{s_m}(v_m)).
-    \]
-    The Jacobian is block lower triangular. Hence
-    \[
-      \det JK_\phi=(-3456)^{n+m}.
-    \]}
-  };
+      \vspace{0.8mm}
+      Give the clause a fresh block $v_j$ and output
+      $T_{s_j}(v_j)=H(v_j)-(1-s_j)\Delta$.  Since $H$ reaches $0$ but never
+      reaches $\Delta$,
+      \[
+        \exists v_j:\ T_{s_j}(v_j)=0
+        \quad\Longleftrightarrow\quad s_j=1.
+      \]
 
-  \node[anchor=south west,inner sep=0pt,text width=146mm]
-    at ([xshift=7mm,yshift=3mm]current page.south west) {%
-      {\color{muted}\fontsize{6.2}{7.2}\selectfont
-      \textbf{Lev Stambler} · University of Maryland, College Park · Tear Labs
-      \hfill \textbf{Paper + proof:} github.com/Lev-Stambler/TCS\par
-      Work largely assisted by GPT-5.6 Sol, which also generated this PDF;
-      verified by Lev Stambler.}
+      Stack all variable and clause blocks to obtain $K_\phi$.  It has a zero
+      exactly when every clause is true.  Moreover, each $T_{s_j}$ differs
+      from $H$ only by an output translation, so $JK_\phi$ is block lower
+      triangular with copies of $JH$ on the diagonal.  Hence
+      $\det JK_\phi=(-3456)^{n+m}$, while $\deg K_\phi\le7$.}
     };
 \end{tikzpicture}
 
 \null
-
 \end{document}
